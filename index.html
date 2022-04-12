@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Course notes example code</title>
+    <title>Commonwealth Games Birmingham</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -66,9 +66,11 @@
             let start = document.getElementById("start").value
             let end = document.getElementById("end").value
 
-            let request = {origin: start,
+            let request = {
+                origin: start,
                 destination: end,
-                travelMode: travelMode}
+                travelMode: travelMode
+            }
 
             directionsService = new google.maps.DirectionsService()
             directionsService.route(request, (route, status) =>
@@ -83,22 +85,28 @@
 </head>
 
 <body>
+<a href ="IndianTourists.html">Indian Tourists</a>
 <div id=control-panel>
     <span class=select-location-label>Start:</span>
     <select id=start onChange=calculateRoute()>
-        <option value="Dundalk Institute of Technology Louth Ireland">DkIT</option>
-        <option value="Dublin City University Collins Avenue Extension Whitehall Dublin 9">DCU</option>
-        <option value="Maynooth University Ireland">Maynooth</option>
-        <option value="Queens University Belfast">Queens</option>
+        <option value="Pool Meadow, Coventry CV1 5AD, United Kingdom">Pool Meadow</option>
+        <option value="Birmingham Airport">Birmingham Airport</option>
+        <option value="Alexander Stadium, Walsall Rd, Birmingham, Perry Bar B42 2LR, United Kingdom">Alexander Stadium</option>
+        <option value="Wolverhampton, United Kingdom">Wolverhampton</option>
+        <option value="Solihull, United Kingdom">Solihull</option>
+        <option value="Royal Sutton Coldfield">Royal Sutton Coldfield</option>
+
     </select>
 
     <br>
     <span class=select-location-label>End:</span>
     <select id=end onChange=calculateRoute()>
-        <option value="Dundalk Institute of Technology Louth Ireland">DkIT</option>
-        <option value="Dublin City University Collins Avenue Extension Whitehall Dublin 9" selected>DCU</option>
-        <option value="Maynooth University Ireland">Maynooth</option>
-        <option value="Queens University Belfast">Queens</option>
+        <option value="Birmingham Airport">Birmingham Airport</option>
+        <option value="Pool Meadow, Coventry CV1 5AD, United Kingdom">Pool Meadow</option>
+        <option value="Alexander Stadium, Walsall Rd, Birmingham, Perry Bar B42 2LR, United Kingdom">Alexander Stadium</option>
+        <option value="Wolverhampton, United Kingdom">Wolverhampton</option>
+        <option value="Solihull, United Kingdom">Solihull</option>
+        <option value="Royal Sutton Coldfield">Royal Sutton Coldfield</option>
     </select>
 </div>
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commonwealth Games Birmingham</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        #map
+        {
+            width:600px;
+            height:600px;
+            border:thin solid #ccc;
+        }
+    </style>
+
+    <!-- Google Maps -->
+    <script src=https://maps.googleapis.com/maps/api/js?key=AIzaSyCQRTMuRO4K1AyH9fFr6zH7Kd2qSwz3Wuk></script>
+
+    <script>
+        window.onload = () =>
+        {
+            let mainHotelLoc = {lat:52.5277, lng:-1.89639}
+
+
+            let map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 16,
+                center: mainHotelLoc,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControlOptions: {
+                    mapTypeIds: ["roadmap", "satellite", "hide_poi"]
+                }
+            })
+
+            hidePointsOfInterest(map)
+
+            let infoWindow = new google.maps.InfoWindow()
+
+
+            let marker = new google.maps.Marker({
+                position: mainHotelLoc,
+                icon: "https://media.discordapp.net/attachments/630384837617778720/963398388546670642/rsz_1rsz_3448546.png",
+                map: map
+            })
+
+            google.maps.event.addListener(marker, "click", () =>
+            {
+                infoWindow.setContent("Travelodge Hotel Perry Bar")
+                infoWindow.open(map, marker)
+            })
+
+        }
+
+
+        function hidePointsOfInterest(map)
+        {
+            let styles = [
+                {
+                    "featureType": "poi",
+                    "stylers": [{"visibility": "off"}]
+                }
+            ]
+
+            let styledMapType = new google.maps.StyledMapType(styles, {name: "POI Hidden", alt: "Hide Points of Interest"})
+            map.mapTypes.set("hide_poi", styledMapType)
+
+            map.setMapTypeId("hide_poi")
+        }
+    </script>
+
+
+</head>
+
+<body>
+<h1>Indian Tourists at the Commonwealth Games Birmingham</h1>
+<div id=map></div>
+
+<br>
+<a href ="index.html">Back</a>
+</body>
+</html>
