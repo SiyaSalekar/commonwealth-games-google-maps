@@ -3,164 +3,56 @@
     <title>Commonwealth Games Indian Tourists Guide</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <style>
-            #map
-            {
-                width:600px;
-                height:600px;
-                border:thin solid #ccc;
-            }
-
-            #perry-content
-            {
-                width:400px;
-                height:200px;
-            }
-
-            #perry-content img
-            {
-                clear:both;
-                float:left;
-                width: 150px;
-                border-radius:100px;
-                margin: 20px;
-                margin-top:0px;
-                border:thin solid #CCC;
-            }
-            #perry-h1{
-            margin-left:30px;
-            }
-        </style>
+    <link rel="stylesheet" href="css/commonwealth.css">
+    <script src="js/gmaps.js"></script>
 
     <!-- Google Maps -->
     <script src=https://maps.googleapis.com/maps/api/js?key=AIzaSyCQRTMuRO4K1AyH9fFr6zH7Kd2qSwz3Wuk&libraries=places></script>
-
-
-        
-    <script>
-        let map;
-        let service;
-        let infoWindow;
-
-        window.onload = () =>
-        {
-                
-            let services_centre_location = {lat: 54.00428271, lng: -6.40210535}  
-
-            const CONTENT = 0,
-                  LATITUDE = 1,
-                  LONGITUDE = 2
-
-            let perryContent = `<div id=perry-content>
-                                    <h1 id=perry-h1>Travelodge Perry Bar</h1>
-                                    <div id=content>
-                                        <img src = './images/mainHotel.jpg'>
-                                        <p>Main stay location for Indian tourists in Birmingham. A luxurious place to relax and enjoy your stay to the fullest.</p>
-                                        <p>For more information, see our website<br><a href=https://www.travelodge.co.uk/hotels/415/Birmingham-Perry-Barr-hotel>Official Website</a></p>
-                                    </div>
-                                </div>`
-
-            let locations = [
-                [perryContent, 52.5277, -1.89639]
-            ]
-
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
-                center: new google.maps.LatLng(locations[0][LATITUDE], locations[0][LONGITUDE]),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                 mapTypeControlOptions: {
-                mapTypeIds: ["roadmap", "satellite", "hide_poi"]
-            }
-            })
-
-            hidePointsOfInterest(map);
-
-            service = new google.maps.places.PlacesService(map)
-
-       
-
-            
-            infoWindow = new google.maps.InfoWindow()
-
-            locations.map(location =>
-            {
-                let marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(location[LATITUDE], location[LONGITUDE]),
-                    // icon: "images/hotelMarker.png",
-                    map: map
-                })
-
-                google.maps.event.addListener(marker, "click", () =>
-                {
-                    infoWindow.setContent(location[CONTENT])
-                    infoWindow.open(map, marker)
-                })
-            })
-
-            service.nearbySearch({
-                location: {lat: locations[0][LATITUDE], lng:  locations[0][LONGITUDE]}, // centre of the search
-                radius: 500, // radius (in metres) of the search
-                type: "cafe"
-            }, getNearbyServicesMarkers)
-        }
-
-        function hidePointsOfInterest(map)
-        {
-            let styles = [
-                {
-                    "featureType": "poi",
-                    "stylers": [{"visibility": "off"}]
-                }
-            ]
-
-            let styledMapType = new google.maps.StyledMapType(styles, {name: "POI Hidden", alt: "Hide Points of Interest"})
-            map.mapTypes.set("hide_poi", styledMapType)
-
-            map.setMapTypeId("hide_poi")
-        }
-
-        function getNearbyServicesMarkers(results, status)
-        {
-            if (status === google.maps.places.PlacesServiceStatus.OK)
-            {
-                results.map(result =>
-                {
-                    createMarker(result)
-                })
-            }
-        }
-
-        function createMarker(place)
-        {
-            let icon = {
-                url: place.icon, // url
-                scaledSize: new google.maps.Size(30, 30) // scale the image to an icon size
-            }
-            
-            let marker = new google.maps.Marker({
-                map: map,
-                icon: icon,
-                position: place.geometry.location
-            })
-
-            google.maps.event.addListener(marker, "click", () =>
-            {
-                infoWindow.setContent(place.name)
-                infoWindow.open(map, marker)
-            })
-        }
-
-    </script> 
 
 </head>
 
 <body>
 <h1>Indian Tourists at the Commonwealth Games Birmingham</h1>
+
+<div>
+    <details id=directions class="container bg-light" >
+        <summary>Directions</summary>
+    </details>
+
+<div class="p-3 rounded-0 text-light" >
+    <div id=control-panel class="">
+        <div class="form-label text-start">Start:</div>
+        <input class="form-control" id=start type=text>
+
+
+        <div class="form-label text-start">End:</div>
+        <input class="form-control" id=end type=text>
+
+<!--        <input class="btn btn-light mt-3 float-start" type=button onclick=calculateRoute() id=submit-->
+<!--               value=Submit>-->
+
+
+
+        <button onclick=calculateRoute("DRIVING")>drive</button>
+        <button onclick=calculateRoute("WALKING")>walk</button>
+        <button onclick=calculateRoute("TRANSIT")>transit</button>
+        <button onclick=calculateRoute("BICYCLING")>bike</button>
+
+
+    </div>
+
+
+</div>
+</div>
 <div id=map></div>
 
 <br>
 <a href ="index.html">Back</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

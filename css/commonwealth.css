@@ -1,0 +1,26 @@
+#map
+{
+    width:600px;
+    height:600px;
+    border:thin solid #ccc;
+}
+
+#perry-content
+{
+    width:400px;
+    height:200px;
+}
+
+#perry-content img
+{
+    clear:both;
+    float:left;
+    width: 150px;
+    border-radius:100px;
+    margin: 20px;
+    margin-top:0px;
+    border:thin solid #CCC;
+}
+#perry-h1{
+    margin-left:30px;
+}
