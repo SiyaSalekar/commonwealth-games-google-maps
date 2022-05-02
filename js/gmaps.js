@@ -107,6 +107,19 @@ function getNearbyServicesMarkers(results, status)
 
 function createMarker(place)
 {
+
+    if (place.types.includes("cafe")){
+        place.icon = "/images/cafe-32.png"
+    }
+    if(place.types.includes("bar")){
+        place.icon = "images/bar-32.png"
+    }
+    if(place.types.includes("atm") && !place.types.includes("cafe"|"bar")){
+        place.icon = "images/atm-machine.png"
+    }
+    if (place.types.includes("convenience_store")){
+        place.icon = "images/store.png"
+    }
     let icon = {
         url: place.icon, // url
         scaledSize: new google.maps.Size(30, 30) // scale the image to an icon size
