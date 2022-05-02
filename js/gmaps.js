@@ -19,14 +19,22 @@ window.onload = () =>
                                         <p>For more information, see our website<br><a href=https://www.travelodge.co.uk/hotels/415/Birmingham-Perry-Barr-hotel>Official Website</a></p>
                                     </div>
                                 </div>`
+    let stadiumContent = `<div id=stadium-content>
+                                    <h1 id=stadium-h1>Alexander Stadium</h1>
+                                    <div id=content>
+                                        <img src = './images/stadium.jpg'>
+                                        <p>Alexander Stadium is an international athletics stadium located within Perry Park in Perry Barr, Birmingham, England. It is the main athletics venue of the 2022 Commonwealth Games</p>
+                                    </div>
+                                </div>`
 
     let locations = [
-        [perryContent, 52.5277, -1.89639]
+        [perryContent, 52.5277, -1.89639,"images/hotelMarker.png"],
+        [stadiumContent,52.5309094,-1.9049208,"images/stadium-icon.png"]
     ]
 
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 14,
-        center: new google.maps.LatLng(52.4796992,-1.9026911),
+        center: new google.maps.LatLng(52.5309094,-1.9049208),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControlOptions: {
             mapTypeIds: ["roadmap", "satellite", "hide_poi"]
@@ -53,7 +61,7 @@ window.onload = () =>
     {
         let marker = new google.maps.Marker({
             position: new google.maps.LatLng(location[LATITUDE], location[LONGITUDE]),
-            // icon: "images/hotelMarker.png",
+            icon: location[3],
             map: map
         })
 
@@ -144,17 +152,17 @@ function displayMap(type) {
     if (type != null) {
         let placeType = type;
 
-        let qwe = new google.maps.LatLng(52.4796992, -1.9026911)
+        let qwe = new google.maps.LatLng(52.5309094,-1.9049208)
         let service = new google.maps.places.PlacesService(map)
 
         service.nearbySearch({
             location: qwe.toJSON(),
-            radius: 1000,
+            radius: 3000,
             type: placeType
         }, getNearbyServicesMarkers)
 
 
-        map.setZoom(15)
+
         map.panTo(qwe)
     }
 }

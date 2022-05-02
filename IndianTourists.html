@@ -1,10 +1,11 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Commonwealth Games Indian Tourists Guide</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel=stylesheet>
     <link rel="stylesheet" href="css/commonwealth.css">
     <script src="js/gmaps.js"></script>
     <!-- Google Maps -->
@@ -15,96 +16,110 @@
 <body>
 <h1>Indian Tourists at the Commonwealth Games Birmingham</h1>
 
-<div>
-    <details id=directions class="container bg-light" >
-        <summary>Directions</summary>
-    </details>
-
-<div class="p-3 rounded-0 text-light" >
-    <div id=control-panel class="">
-        <div class="form-label text-start">Start:</div>
-        <input class="form-control" id=start type=text>
+<div class="row pe-0 ps-0">
+    <div class="col-2 pe-0 bg-light">
+        <div>
 
 
-        <div class="form-label text-start">End:</div>
-        <input class="form-control" id=end type=text>
-
-<!--        <input class="btn btn-light mt-3 float-start" type=button onclick=calculateRoute() id=submit-->
-<!--               value=Submit>-->
-
+            <div class="p-3 rounded-0 text-dark">
+                <div id=control-panel class="">
+                    <div class="form-label text-start">Start:</div>
+                    <input class="form-control" id=start type=text>
 
 
-        <button onclick=calculateRoute("DRIVING")>drive</button>
-        <button onclick=calculateRoute("WALKING")>walk</button>
-        <button onclick=calculateRoute("TRANSIT")>transit</button>
-        <button onclick=calculateRoute("BICYCLING")>bike</button>
+                    <div class="form-label text-start">End:</div>
+                    <input class="form-control" id=end type=text>
+
+                    </br>
+
+                    <button class="btn btn-secondary"><i  class="material-icons"  onclick=calculateRoute("DRIVING")>directions_car</i></button>
+                    <button class="btn btn-secondary"><i class=material-icons onclick=calculateRoute("TRANSIT")>directions_bus</i></button>
+                    <button class="btn btn-secondary"><i class=material-icons onclick=calculateRoute("BICYCLING")>directions_bike</i></button>
+                    <button class="btn btn-secondary"><i class=material-icons onclick=calculateRoute("WALKING")>directions_walk</i></button>
+
+                    <details id=directions class="container bg-light">
+                        <summary>Directions</summary>
+                    </details>
+                    </br>
+                </div>
+
+                <div class="dropdown btn">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter Places:
+                    </button>
+                    <ul class="dropdown-menu" id="places-dropdown" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item">
+                                <input name=placeType id=airport type=checkbox value=airport
+                                       onclick="displayMap('airport')">
+                                <label class="w-100" for=airport>Airport</label>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item">
+                                <input name=placeType id=art type=checkbox value=airport
+                                       onclick="displayMap('art_gallery')">
+                                <label class="w-100" for=art>Art Gallery</label>
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item">
+                            <input name=placeType id=atm type=checkbox value=amusement_park
+                                   onclick="displayMap( 'atm')">
+                            <label class="w-100" for=atm>Atm</label>
+                        </a></li>
+                        <li><a class="dropdown-item">
+                            <input name=placeType id=bar type=checkbox value=amusement_park
+                                   onclick="displayMap( 'bar')">
+                            <label class="w-100" for=bar>Bar</label>
+                        </a></li>
+
+                        <li><a class="dropdown-item">
+                            <input name=placeType id=cafe type=checkbox value=amusement_park
+                                   onclick="displayMap( 'cafe')">
+                            <label class="w-100" for=cafe>Cafe</label>
+                        </a></li>
+
+                        <li><a class="dropdown-item">
+                            <input name=placeType id=convenience_store type=checkbox value=amusement_park
+                                   onclick="displayMap( 'convenience_store')">
+                            <label class="w-100" for=convenience_store>Convenience Store</label>
+                        </a></li>
+                        <li><a class="dropdown-item">
+                            <input name=placeType id=museum type=checkbox value=amusement_park
+                                   onclick="displayMap( 'museum')">
+                            <label class="w-100" for=museum>Museum</label>
+                        </a></li>
+
+                    </ul>
+                    </br>
+                    </br> </br>
+
+                    <button class="btn btn-secondary" type="button" id="localContext"
+                           >
+                        LocalContext
+                    </button>
+                </div>
+
+            </div>
+        </div>
 
 
+        <br>
+        <a href="index.html">Routes</a>
+        <br>
+        <a href="localContext.html">review places</a>
+        <br>
     </div>
 
-    <div class="dropdown btn">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-            Filter Places:
-        </button>
-        <ul class="dropdown-menu" id="places-dropdown" aria-labelledby="dropdownMenuButton1">
-            <li>
-                <a class="dropdown-item">
-                    <input name=placeType id=airport type=checkbox value=airport
-                           onclick="displayMap('airport')">
-                    <label class="w-100" for=airport>Airport</label>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item">
-                    <input name=placeType id=art type=checkbox value=airport
-                           onclick="displayMap('art_gallery')">
-                    <label class="w-100" for=art>Art Gallery</label>
-                </a>
-            </li>
-            <li><a class="dropdown-item">
-                <input name=placeType id=atm type=checkbox value=amusement_park
-                       onclick="displayMap( 'atm')">
-                <label class="w-100" for=atm>Atm</label>
-            </a></li>
-            <li><a class="dropdown-item">
-                <input name=placeType id=bar type=checkbox value=amusement_park
-                       onclick="displayMap( 'bar')">
-                <label class="w-100" for=bar>Bar</label>
-            </a></li>
 
-            <li><a class="dropdown-item">
-                <input name=placeType id=cafe type=checkbox value=amusement_park
-                       onclick="displayMap( 'cafe')">
-                <label class="w-100" for=cafe>Cafe</label>
-            </a></li>
-
-            <li><a class="dropdown-item">
-                <input name=placeType id=convenience_store type=checkbox value=amusement_park
-                       onclick="displayMap( 'convenience_store')">
-                <label class="w-100" for=convenience_store>Convenience Store</label>
-            </a></li>
-            <li><a class="dropdown-item">
-                <input name=placeType id=museum type=checkbox value=amusement_park
-                       onclick="displayMap( 'museum')">
-                <label class="w-100" for=museum>Museum</label>
-            </a></li>
-
-        </ul>
-    </div>
-
-</div>
-</div>
-<br>
-<a href="index.html">Routes</a>
-<br>
-<a href="localContext.html">review places</a>
-<br>
 <div id=map></div>
-
+</div>
 <br>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 
