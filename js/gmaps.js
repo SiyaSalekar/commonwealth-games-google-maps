@@ -26,7 +26,7 @@ window.onload = () =>
 
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 14,
-        center: new google.maps.LatLng(locations[0][LATITUDE], locations[0][LONGITUDE]),
+        center: new google.maps.LatLng(52.4796992,-1.9026911),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControlOptions: {
             mapTypeIds: ["roadmap", "satellite", "hide_poi"]
@@ -64,11 +64,11 @@ window.onload = () =>
         })
     })
 
-    service.nearbySearch({
-        location: {lat: locations[0][LATITUDE], lng:  locations[0][LONGITUDE]}, // centre of the search
-        radius: 500, // radius (in metres) of the search
-        type: "cafe"
-    }, getNearbyServicesMarkers)
+    // service.nearbySearch({
+    //     location: {lat: locations[0][LATITUDE], lng:  locations[0][LONGITUDE]}, // centre of the search
+    //     radius: 500, // radius (in metres) of the search
+    //     type: "cafe"
+    // }, getNearbyServicesMarkers)
 }
 
 function hidePointsOfInterest(map)
@@ -137,5 +137,25 @@ function calculateRoute(travelMode) {
             directionsRenderer.setDirections(route)
         }
     })
+}
+
+function displayMap(type) {
+
+    if (type != null) {
+        let placeType = type;
+
+        let qwe = new google.maps.LatLng(52.4796992, -1.9026911)
+        let service = new google.maps.places.PlacesService(map)
+
+        service.nearbySearch({
+            location: qwe.toJSON(),
+            radius: 1000,
+            type: placeType
+        }, getNearbyServicesMarkers)
+
+
+        map.setZoom(15)
+        map.panTo(qwe)
+    }
 }
 
